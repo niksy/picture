@@ -45,10 +45,8 @@
         /*
             applyMediaListeners
         */
-        _applyMediaListeners = function() {
-            var pictureCollection = _doc.getElementsByTagName('span');
-
-            _removeEvent(_eventPrefix + 'resize', _applyMediaListeners);
+        _applyMediaListeners = function( pPictureCollection ) {
+            var pictureCollection = pPictureCollection || _doc.getElementsByTagName('span');
 
             for (var i = 0, picture; typeof((picture = pictureCollection[i])) !== 'undefined'; i++) {
                 if ('pictureSource' in picture) {
@@ -90,7 +88,7 @@
                 toString    : function() {
                     return this.mql.matches ? 1 : 0;
                 }
-            };  
+            };
         },
 
         /*
@@ -132,8 +130,8 @@
         /*
             parse
         */
-        parse: function() {
-            var pictureCollection = _doc.getElementsByTagName('span');
+        parse: function( pPictureCollection ) {
+            var pictureCollection = pPictureCollection || _doc.getElementsByTagName('span');
             for (var i = 0, picture; typeof((picture = pictureCollection[i])) !== 'undefined'; i++) {
                 if (picture.getAttribute('data-picture') !== null && !('pictureSource' in picture)) {
                     var sourceCollection    = picture.getElementsByTagName('span'),
@@ -187,12 +185,8 @@
                 }
             }
 
-            _removeEvent(_eventPrefix + 'resize', _applyMediaListeners);
-            _addEvent(_eventPrefix + 'resize', _applyMediaListeners);
+            _applyMediaListeners( pictureCollection );
         }
     };
 
-    // Set up listeners
-    _addEvent(_eventPrefix + 'DOMContentLoaded', _init);
-    _addEvent(_eventPrefix + 'load', _init);
 })(window);
