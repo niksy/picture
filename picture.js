@@ -10,14 +10,76 @@
         _removeEvent    = win.removeEventListener || win.detachEvent,
         _srcsetExpr     = /[^\s]+/g,
 
-        /*
-            init
-        */
-        _init       = function() {
-            _removeEvent(_eventPrefix + 'load', _init);
-            _removeEvent(_eventPrefix + 'DOMContentLoaded', _init);
+        _getPreviousSiblings = function(elem, filter) {
+            var siblings = [];
+            elem = elem.previousSibling;
+            while (elem !== null) {
+                if (!filter || filter(elem)) {
+                    siblings.push(elem);
+                }
+                elem = elem.previousSibling;
+            }
+            return siblings;
+        },
 
-            win.Picture.parse();
+        _getNextSiblings = function(elem, filter) {
+            var siblings = [];
+            elem = elem.nextSibling;
+            while (elem !== null) {
+                if (!filter || filter(elem)) {
+                    siblings.push(elem);
+                }
+                elem = elem.nextSibling;
+            }
+            return siblings;
+        },
+
+        _filterSpans = function(elem) {
+            switch (elem.nodeName.toUpperCase()) {
+                case 'SPAN':
+                    return true;
+                default:
+                    return false;
+            }
+        },
+
+        _filterImgs = function(elem) {
+            switch (elem.nodeName.toUpperCase()) {
+                case 'IMG':
+                    return true;
+                default:
+                    return false;
+            }
+        },
+
+        _hidePicturePlacholder = function (arr) {
+            for ( var i = 0, arrLength = arr.length; i < arrLength; i++ ) {
+                if ( arr[i].className.match(/postpone-placeholder/gi) !== null ) {
+                    arr[i].className += ' hidden ';
+                    arr[i].style.display = 'none';
+                }
+            }
+        },
+
+        _placeImage = function ( img, picture, sourceData ) {
+
+            img.src = picture.pictureCurrentSrc = sourceData.src;
+            sourceData.element.appendChild(img);
+            sourceData.element.className += ' picture-source-loaded ';
+
+            if ( picture.className.match(/picture-parsed/gi) === null ) {
+                picture.className += ' picture-parsed ';
+            }
+
+        },
+
+        _largerImageAlreadyLoaded = function (arr) {
+            for ( var i = 0, arrLength = arr.length; i < arrLength; i++ ) {
+                if ( arr[i].className.match(/picture-source-loaded/gi) !== null ) {
+                    return true;
+                }
+            }
+            return false;
         },
 
         /*
