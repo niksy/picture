@@ -1,0 +1,27 @@
+{
+  "name": "Picture",
+  "version": "2.3.0",
+  "description": "Picture element polyfill for responsive images",
+  "main": "picture.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/niksy/picture.git"
+  },
+  "author": "David Knight",
+  "contributors": [
+    "Ivan Nikolić"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/niksy/picture/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.5",
+    "grunt-contrib-concat": "~0.3.0"
+  }
+}
