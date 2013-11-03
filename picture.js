@@ -86,7 +86,14 @@
             applyImage
         */
         _applyImage = function(picture, sourceData) {
+
             var img = picture.pictureImage;
+            var arrPicturePlaceholders = _getNextSiblings(picture, _filterImgs);
+            var arrSourceDataPreviousSiblings = _getPreviousSiblings(sourceData.element, _filterSpans);
+
+            if ( _largerImageAlreadyLoaded( arrSourceDataPreviousSiblings ) === true ) {
+                return;
+            }
 
             if (picture.parentNode === null) {
                 sourceData.mql.removeListener(sourceData.listener);
@@ -98,8 +105,24 @@
                 }
 
                 if (sourceData && sourceData.src !== picture.pictureCurrentSrc) {
-                    img.src = picture.pictureCurrentSrc = sourceData.src;
-                    sourceData.element.appendChild(img);
+
+                    if ( arrPicturePlaceholders.length === 0 ) {
+
+                        _placeImage( img, picture, sourceData );
+
+                    } else {
+
+                        var image = new Image();
+                        image.onload = function() {
+
+                            _placeImage( img, picture, sourceData );
+                            _hidePicturePlacholder( arrPicturePlaceholders );
+
+                        };
+                        image.src = picture.pictureCurrentSrc = sourceData.src;
+
+                    }
+
                 }
             }
         },
