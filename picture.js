@@ -244,7 +244,7 @@
 
                     if (!srcsetAttr && !srcAttr) {
                         for (var j = sourceCollection.length - 1, source; typeof((source = sourceCollection[j])) !== 'undefined'; j--) {
-                            var mediaAttr = source.getAttribute('data-media');
+                            var mediaAttr = source.getAttribute('data-media') || '(min-width:0px)';
 
                             srcsetAttr  = source.getAttribute('data-srcset');
                             srcAttr     = '';
