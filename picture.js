@@ -1,4 +1,4 @@
-/* Picture v2.3.1 - Picture element polyfill for responsive images. Authors & copyright (c) 2013: WebLinc, David Knight. Forked & modified by Ivan Nikolić */
+/* Picture v2.4.0 - Picture element polyfill for responsive images. Authors & copyright (c) 2013: WebLinc, David Knight. Forked & modified by Ivan Nikolić */
 ('HTMLPictureElement' in window) || (function(win) {
     'use strict';
 
