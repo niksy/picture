@@ -32,6 +32,16 @@
             return siblings;
         },
 
+        _objectSize = function(pObject) {
+            var objectSize = 0;
+            for (var key in pObject){
+                if (pObject.hasOwnProperty(key)) {
+                    objectSize++;
+                }
+            }
+            return objectSize;
+        },
+
         _filterSpans = function(elem) {
             switch (elem.nodeName.toUpperCase()) {
                 case 'SPAN':
@@ -269,6 +279,45 @@
             }
 
             _applyMediaListeners( pictureCollection );
+        },
+
+        updatePicture: function( pPicture, pData ) {
+
+            var currentlyDisplayedImage   = pPicture.pictureImage;
+            var pictureElements           = pPicture.getElementsByTagName('span');
+            var currentlyDisplayedPicture = function (arr) {
+                for ( var i = 0, arrLength = arr.length; i < arrLength; i++ ) {
+                    if ( arr[i].className.match(/picture-source-loaded/gi) !== null ) {
+                        return arr[i];
+                    }
+                }
+                return null;
+            };
+            var currentlyValidImageData;
+            var srcList = pData['src-list'];
+            var i       = _objectSize(srcList);
+
+            for ( var prop in srcList ) {
+                if ( srcList.hasOwnProperty( prop ) ) {
+
+                    if ( currentlyDisplayedPicture(pictureElements).getAttribute('data-' + prop) !== null ) {
+                        currentlyValidImageData = srcList[prop];
+                    }
+
+                    i--;
+                    pPicture.pictureSource[i].src = srcList[prop].src;
+                    pPicture.pictureSource[i].element.setAttribute('data-src', srcList[prop].src);
+
+                }
+            }
+
+            pPicture.pictureAlt = pData.alt;
+            pPicture.setAttribute('data-alt', pData.alt);
+            currentlyDisplayedImage.setAttribute('alt', pData.alt);
+
+            pPicture.pictureCurrentSrc = currentlyValidImageData.src;
+            currentlyDisplayedImage.setAttribute('src', currentlyValidImageData.src);
+
         }
     };
 
