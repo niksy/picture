@@ -98,9 +98,18 @@
             var img = picture.pictureImage;
             var arrPicturePlaceholders = _getNextSiblings(picture, _filterImgs);
             var arrSourceDataPreviousSiblings = _getPreviousSiblings(sourceData.element, _filterSpans);
+            var elAttributesList = sourceData.element.attributes;
 
             if ( _largerImageAlreadyLoaded( arrSourceDataPreviousSiblings ) === true ) {
                 return;
+            }
+
+            for ( var prop in elAttributesList ) {
+                if ( elAttributesList.hasOwnProperty( prop ) ) {
+                    if ( typeof(elAttributesList[prop]) === 'object' && elAttributesList[prop].name.match(/data-src\d+/gi) !== null ) {
+                        picture.setAttribute('data-current-src', elAttributesList[prop].name);
+                    }
+                }
             }
 
             if (picture.parentNode === null) {
