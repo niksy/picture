@@ -117,8 +117,9 @@
                 sourceData = picture = null;
             } else {
                 if (!img) {
-                    img     = picture.pictureImage = _doc.createElement('img');
-                    img.alt = picture.pictureAlt;
+                    img           = picture.pictureImage = _doc.createElement('img');
+                    img.alt       = picture.pictureAlt;
+                    img.className += ' ' + picture.pictureClassList + ' ';
                 }
 
                 if (sourceData && sourceData.src !== picture.pictureCurrentSrc) {
@@ -247,6 +248,7 @@
                     picture.pictureSource       = [];
                     picture.pictureImage        = img && img.parentNode.nodeName !== 'NOSCRIPT' && img;
                     picture.pictureAlt          = picture.getAttribute('data-alt') || (img && img.getAttribute('alt')) || 'picture';
+                    picture.pictureClassList    = picture.getAttribute('data-class') || '';
                     picture.pictureCurrentSrc   = '';
 
                     if (srcsetAttr) {
