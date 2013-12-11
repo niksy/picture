@@ -106,7 +106,7 @@
 
             for ( var prop in elAttributesList ) {
                 if ( typeof(elAttributesList[prop]) === 'object' && elAttributesList[prop].name.match(/data-src\d+/gi) !== null ) {
-                    picture.setAttribute('data-current-src', elAttributesList[prop].name);
+                    picture.setAttribute('data-current-src', elAttributesList[prop].name.replace('data-',''));
                 }
             }
 
