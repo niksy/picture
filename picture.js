@@ -72,6 +72,10 @@
         _placeImage = function ( img, picture, sourceData ) {
 
             img.src = picture.pictureCurrentSrc = sourceData.src;
+
+            img.removeAttribute('width');
+            img.removeAttribute('height');
+
             sourceData.element.appendChild(img);
             sourceData.element.className += ' picture-source-loaded ';
 
