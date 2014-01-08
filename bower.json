@@ -1,7 +1,7 @@
 {
   "name": "Picture",
   "main": "picture.js",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "homepage": "https://github.com/niksy/picture",
   "description": "Picture element polyfill for responsive images",
   "authors": [

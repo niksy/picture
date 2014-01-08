@@ -1,6 +1,6 @@
 {
   "name": "Picture",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "description": "Picture element polyfill for responsive images",
   "main": "picture.js",
   "directories": {
