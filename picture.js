@@ -1,5 +1,5 @@
 /* Picture v2.5.3 - Picture element polyfill for responsive images. Authors & copyright (c) 2014: WebLinc, David Knight. Forked & modified by Ivan Nikolić */
-('HTMLPictureElement' in window) || (function(win) {
+(function(win) {
     'use strict';
 
     var _doc            = win.document,
